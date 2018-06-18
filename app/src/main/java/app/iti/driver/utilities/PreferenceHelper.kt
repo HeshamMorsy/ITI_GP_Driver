@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 /**
- * Created by Hazem on 6/12/2018.
+ * Created by Hazem on 6/18/2018.
  */
 object PreferenceHelper {
 
@@ -28,6 +28,7 @@ object PreferenceHelper {
             is Boolean -> edit({ it.putBoolean(key, value) })
             is Float -> edit({ it.putFloat(key, value) })
             is Long -> edit({ it.putLong(key, value) })
+            is Double -> edit({ it.putLong(key, value.toLong()) })
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
     }
@@ -39,6 +40,7 @@ object PreferenceHelper {
             Boolean::class -> getBoolean(key, defaultValue as? Boolean ?: false) as T?
             Float::class -> getFloat(key, defaultValue as? Float ?: -1f) as T?
             Long::class -> getLong(key, defaultValue as? Long ?: -1) as T?
+            Double::class -> getLong(key, defaultValue as? Long ?: -1).toDouble() as T?
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
     }

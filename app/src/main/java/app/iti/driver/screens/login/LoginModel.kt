@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by Hesham on 5/29/2018.
  * Responsible for checking if the email and password exists and matches together in the login api, if requested from LoginPresenter
  */
-class LoginModel(val presenter: LoginPresenter) : Model {
+class LoginModel(val presenter: Presenter) : Model {
 
     // check if the user email and password exists and matches in the login api
     override fun requestToApi(email: String, password: String) {
@@ -29,12 +29,12 @@ class LoginModel(val presenter: LoginPresenter) : Model {
     }
 
     private fun handleResponse(response: LoginResponse) {
+        Log.i("response", "success receiving data $response")
         presenter.receiveResponse(response)
     }
 
     private fun handleError(error: Throwable) {
-        Log.i("error Response", "error receiving data"+error.message)
-        presenter.errorResponse()
-//        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
+        Log.i("error", "error receiving data "+error.message)
+        presenter.errorResponse(error)
     }
 }

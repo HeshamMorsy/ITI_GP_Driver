@@ -8,7 +8,7 @@ import retrofit2.http.QueryMap
 
 interface LoginService {
 
-    @POST("authentication/signin")
+    @POST("authentication/drivers/signin")
     fun getTokin(@QueryMap options:Map<String, String> ) : Observable<LoginResponse>
 }
 

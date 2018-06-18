@@ -8,6 +8,10 @@ import android.util.Log
 import android.widget.TextView
 import app.iti.driver.R
 import app.iti.driver.contracts.LoginContract.*
+import app.iti.driver.entities.LoginResponse
+import app.iti.driver.screens.home.HomeActivity
+import app.iti.driver.utilities.PreferenceHelper
+import app.iti.driver.utilities.PreferenceHelper.setValue
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -34,25 +38,12 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
 
     }
 
-    // method to handle on click on register now textView and go to SignUpActivity
-    fun toRegisterScreen(view:android.view.View){
-        /*val intent = Intent(this, SignUpActivity::class.java)
-        // start your register activity
-        startActivity(intent)
-        finish()*/
-    }
-
-    // method to handle on click on forgot password textView and go to ForgotPasswordActivity
-    fun toForgotPassword(view:android.view.View){
-        /*val intent = Intent(this, ForgotPasswordActivity::class.java)
-        // start your forgot password activity
-        startActivity(intent)*/
-    }
-
     // login button action when clicked
     fun loginBtnEvent(view:android.view.View){
         val email:String = login_emailEditText.text.toString()
         val password:String = login_passwordEditText.text.toString()
+        Log.i("Login email", email)
+        Log.i("Login password", password)
         mPresenter?.login(email,password)
 
     }
@@ -70,25 +61,35 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         if (v == login_emailEditText && hasFocus == false) {
             mPresenter?.isEmailValid(login_emailEditText.text.toString())
         }
-        if(v == login_passwordEditText && hasFocus == false){
-            mPresenter?.isPasswordValid(login_passwordEditText.text.toString())
-        }
+//        if(v == login_passwordEditText && hasFocus == false){
+//            mPresenter?.isPasswordValid(login_passwordEditText.text.toString())
+//        }
     }
 
 
-    override fun goToHomeScreen() {
-        /*val myIntent = Intent(this, HomeActivity::class.java)
+    override fun goToHomeScreen(response: LoginResponse) {
+        // save authentication token in shared preferences
+        val defaultPref = PreferenceHelper.defaultPrefs(this)
+        defaultPref.setValue("auth_token",response.auth_token)
+        defaultPref.setValue("email",response.driver.email)
+        defaultPref.setValue("phone",response.driver.phone)
+        defaultPref.setValue("name",response.driver.name)
+        defaultPref.setValue("latitude",response.driver.latitude)
+        defaultPref.setValue("longitude",response.driver.longitude)
+        defaultPref.setValue("city",response.driver.city)
+        defaultPref.setValue("created_at",response.driver.created_at)
+        defaultPref.setValue("updated_at",response.driver.updated_at)
+        defaultPref.setValue("device_token",response.driver.device_token)
+        defaultPref.setValue("id",response.driver.id)
+        defaultPref.setValue("password_digest",response.driver.password_digest)
+        defaultPref.setValue("status",response.driver.status)
+        defaultPref.setValue("vehicle_kind",response.driver.vehicle_kind)
+        Log.i("response","sata inside presenter: " + response)
+        Log.i("response","inside view")
+        val myIntent = Intent(this, HomeActivity::class.java)
         // start home activity
         startActivity(myIntent)
-        finish()*/
-    }
-
-    override fun goToSignUpScreen() {
-        /*val myIntent = Intent(this, SignUpActivity::class.java)
-        myIntent.putExtra("is_verified",false)
-        // start home activity
-        startActivity(myIntent)
-        finish()*/
+        finish()
     }
 
     override fun startLoading(mes:String){

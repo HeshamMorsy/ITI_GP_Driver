@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitCreation {
 
     companion object {
-        private val baseUrl = "https://driveo.herokuapp.com/api/v1/"
+        private val baseUrl = "https://carrierapi.herokuapp.com/api/v1/"
         private var retrofit:Retrofit? = null
         fun createRetrofit(): Retrofit {
             if(retrofit == null){

@@ -13,4 +13,22 @@
     <string name="registerNow">\tregister now</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <!--navigation drawer-->
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <!--navigation menu-->
+    <string name="home">Home</string>
+    <string name="myHistory">My History</string>
+    <string name="aboutUs">About us</string>
+    <string name="termsAndConditions">Terms and conditions</string>
+    <string name="about">About</string>
+    <!--error messages-->
+    <string name="wrongMsg">Something went wrong! please check internet connection..</string>
+
+
 </resources>

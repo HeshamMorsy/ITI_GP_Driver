@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="38dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="14dp"
         android:gravity="center"
         android:text="@string/signIn"
         android:textColor="@color/header"
@@ -38,10 +39,10 @@
         android:id="@+id/textInputLayout5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="97dp"
+        android:layout_marginBottom="79dp"
         android:layout_marginEnd="54dp"
         android:layout_marginStart="54dp"
-        app:layout_constraintBottom_toTopOf="@+id/login_forgotPassword"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signTxt">
@@ -62,12 +63,13 @@
         android:id="@+id/textInputLayout6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="60dp"
         android:layout_marginEnd="54dp"
         android:layout_marginStart="54dp"
-        app:layout_constraintBottom_toBottomOf="@+id/login_forgotPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
 
         <EditText
             android:id="@+id/login_passwordEditText"
@@ -81,65 +83,23 @@
     </android.support.design.widget.TextInputLayout>
 
 
-    <TextView
-        android:id="@+id/login_forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="42dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="51dp"
-        android:gravity="center"
-        android:onClick="toForgotPassword"
-        android:text="@string/forgotPasswor"
-        android:textColor="@color/textColor"
-        app:layout_constraintBottom_toTopOf="@+id/login_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/signTxt"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
-
     <Button
         android:id="@+id/login_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="92dp"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:textColor="@android:color/white"
         android:background="@drawable/btns_bg"
         android:maxHeight="3dp"
         android:onClick="loginBtnEvent"
         android:text="@string/login"
+        android:textColor="@android:color/white"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/toProfileTxt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_forgotPassword" />
-
-    <TextView
-        android:id="@+id/toProfileTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginStart="2dp"
-        android:text="@string/noAccount"
-        android:textColor="@color/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/login_registerNowTextView"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
-
-    <TextView
-        android:id="@+id/login_registerNowTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="toRegisterScreen"
-        android:text="@string/registerNow"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintBaseline_toBaselineOf="@+id/toProfileTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/toProfileTxt" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
 </android.support.constraint.ConstraintLayout>
