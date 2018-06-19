@@ -5,7 +5,9 @@ import android.os.Bundle
 import app.iti.driver.R
 import app.iti.driver.contracts.HistoryContract.*
 
-class HistoryActivity : AppCompatActivity(), View {
+
+class HistoryActivity : AppCompatActivity(), View{
+
     // reference to presenter
     lateinit var mPresenter: Presenter
 

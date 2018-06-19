@@ -2,24 +2,32 @@ package app.iti.driver.screens.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import app.iti.driver.R
-import app.iti.driver.contracts.HomeContract.*
+import app.iti.driver.contracts.HomeContract.Presenter
+import app.iti.driver.contracts.HomeContract.View
 import app.iti.driver.screens.about.AboutActivity
 import app.iti.driver.utilities.PreferenceHelper
 import app.iti.driver.utilities.PreferenceHelper.get
-import app.iti.driver.utilities.PreferenceHelper.defaultPrefs
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.app_bar_home.*
 
-class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,View {
+class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, View,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        OnMapReadyCallback {
+
     // reference to presenter
     lateinit var mPresenter: Presenter
 
@@ -29,24 +37,25 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mPresenter = HomePresenter()
         mPresenter.initPresenter(this)
 
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         val sharedPreferences = PreferenceHelper.defaultPrefs(this)
         val latitude = sharedPreferences.get("latitude",0.0)!!.toDouble()
         val longitude = sharedPreferences.get("longitude",0.0)!!.toDouble()
         Toast.makeText(this,"$latitude --- $longitude",Toast.LENGTH_SHORT).show()
 
-//        setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer_layout, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        hamb.setOnClickListener {
+            drawer_layout.openDrawer(Gravity.LEFT)
+        }
     }
 
     override fun onBackPressed() {
@@ -95,5 +104,27 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+
+    override fun onConnected(p0: Bundle?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onMapReady(mMap: GoogleMap?) {
+
+        val cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(LatLng(29.9062619,31.1926205), 13f)
+        mMap!!.animateCamera(cameraUpdate)
+//        mMapView!!.isMyLocationEnabled = true
+        Log.i("googleplaces", "map bacame ready")
+
     }
 }
